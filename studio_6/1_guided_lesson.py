@@ -17,13 +17,18 @@ student_2_expected_graduation_year = "2025"
 
 # TODO: Create a new student student_3 following the same format
 
+student_3_id = 18560931
+student_3_name = "Clifford"
+student_3_name = "Bartholomew"
+student_3_major = "Marketing"
+student_3_expected_graduation_year = "2030"
 
 
 
 
 # Discussion: What are some problems with this approach?
 
-
+# Answer: Tedius, really long variable names, too many variables (not scalable), prone to typos
 
 
 
@@ -32,19 +37,36 @@ student_2_expected_graduation_year = "2025"
 # OOP Property - Encapsulation: Let's contain all of this data into a single Student class
 
 
+
 # Basic structure of a class
 class Student:
     # TODO: Let's build this class!
-    def __init__(self):
-        pass
+    def __init__(self, id, first_name, last_name, major, graduation_year):
+        self.__id = id
+        self.first_name = first_name
+        self.last_name = last_name
+        self.major = major
+        self.graduation_year = graduation_year
 
+    @property
+    def id(self):
+        return self.__id
 
+    def get_full_name(self):
+        return self.first_name + " " + self.last_name
+    
+    def get_last_four(self):
+        string_id = str(self.__id)
+        return string_id[-4:]
+        
+    def print_degree_title(self):
+        return "Bachelor's of " + self.major
 
 # TODO: Let's recreate our 3 students as objects of our new class!
 
-
-
-
+student_1 = Student(18584831, "Daniel", "White", "Computer Science", "2026")
+student_2 = Student(18582185, "Jennie", "Kim", "Chemistry", "2025")
+student_3 = Student(18560931, "Clifford", "Bartholomew", "Marketing", "2030")
 
 
 
@@ -54,7 +76,7 @@ class Student:
 # TODO: Make the id private.
 # Test your code and ensure you cannot access student_1.__id (you should see an error)
     
-
+#print(student_1.__id)
 
 
 # This is good because it prevents users from modifying the id by accident.
@@ -63,13 +85,15 @@ class Student:
 # TODO: Add an @property getter for id
 # Test to make sure you can get the id with student_1.id
     
-
+print(student_1.id)
+print(student_1.get_full_name())
 
 # What if we want a way to just get the last four of the id instead of the whole thing? We can build a custom class method to do this.
     
 # Create a method in the class called get_last_four
 # This should return the last four numbers of the id.
     
+print(student_1.get_last_four())
 
 
 # OOP Property - Inheritence:
@@ -79,10 +103,20 @@ class Student:
     
 # TODO: Create a child class called GradStudent which inherits from the Student class, with the additional property of "specialization"
 
+class GradStudent(Student):
+    def __init__ (self, id, first_name, last_name, major, graduation_year, specialization):
+        
+        super().__init__(id, first_name, last_name, major, graduation_year)
+        self.specialization = specialization
+
+    def print_degree_title(self):
+        return "Master of " + self.major + " with a specialization in " + self.specialization
 
 # create a new student_4 which uses GradStudent instead.
 # this person's major is Computer Science and their Specialization is Artifical Intelligence
     
+student_4 = GradStudent(12304567, "Wumbus", "Ploinkers", "Computer Science", "2028", "Artificial Intelligence")
+
 
 # OOP Property - Polymorphism
 # refers to methods/functions/operators with the same name that can be executed on many objects or classes.
@@ -90,6 +124,8 @@ class Student:
 # for example, maybe we want a method called print_degree_title, which will print "Bachelor of {major}".
 # TODO: add the print_degree_title method to the Student class
     
+print(student_1.print_degree_title())
+
 # What happens if we run student_4.print_degree_title?
 # Yes, it will print "Bachelor of Computer Science".
     
@@ -99,9 +135,10 @@ class Student:
     
 # TODO: Add the print_degree_title to the Graduate class, have it print "Master of {major} with a specialization in {specialization}."
     
+print(student_4.print_degree_title())
+
 # Test your code and make sure print_degree_title prints the master's student as intended.
     
 # This is the end of the OOP lesson. Look at part_2.py for the follow up to this lesson. 
     
-
 
